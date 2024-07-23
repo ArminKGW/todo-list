@@ -6,6 +6,70 @@
     <title>Todo List</title>
 </head>
 <body>
-    <div id="container"></div>
+    <div id="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Projects</h2>
+                <button class="add-project">+New project</button>
+            </div>
+            <div class="projects">
+                <div class="project">
+                    <div class="project-name">Your First Project</div>
+                </div>
+            </div>
+        </div>
+        <dialog id="project-dialog">
+            <form>
+                <p>
+                    <div>
+                        <label for="project-name">Name of project</label>
+                        <input type="text" id="project-name" name="project-name">
+                    </div>
+                    <div class="buttons">
+                        <button class="add-project-cancel">Cancel</button>
+                        <button class="add-project-confirm">Confirm</button>
+                    </div>
+                </p>
+            </form>
+        </dialog>
+        <div class="content">
+            <h1>Your First Project</h1>
+            <div class="todos"></div>
+            <button class="add-task">+Add task</button>
+        </div>
+        <dialog id="task-dialog">
+            <form>
+                <p>
+                    <div>
+                        <label for="task-name">Title</label>
+                        <input type="text" id="task-name" required>
+                    </div>
+                    <div>
+                        <label for="task-description">Description</label>
+                        <input type="text" id="task-description">
+                    </div>
+                    <div>
+                        <label for="task-date">Due date</label>
+                        <input type="date" id="task-date">
+                    </div>
+                    <div>
+                        <textarea>Notes</textarea>
+                    </div>
+                    <div>
+                        <select>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    
+                    <div class="buttons">
+                        <button class="add-task-cancel">Cancel</button>
+                        <button class="add-task-confirm">Confirm</button>
+                    </div>
+                </p>
+            </form>
+        </dialog>
+    </div>
 </body>
 </html>
