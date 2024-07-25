@@ -71,5 +71,13 @@ function changeDoneStatus(projectName, taskName){
     }
 }
 
-export {projects, makeProject, makeTodoItem, addTask, editTask, changeDoneStatus}
+function removeProject(projectName){
+    const index = projects.map(project => project.name)
+    .indexOf(projectName);
+    projects.splice(index, 1);
+}
+
+//have to also write removeProject and editProject functions
+
+export {projects, makeProject, makeTodoItem, addTask, editTask, changeDoneStatus, removeProject};
 
