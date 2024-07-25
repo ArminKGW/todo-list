@@ -71,16 +71,12 @@ function changeDoneStatus(projectName, taskName){
     }
 }
 
-function removeProject(projectName){
-    const index = projects.map(project => project.name)
-    .indexOf(projectName);
+function removeProject(index){
     projects.splice(index, 1);
 }
 
-function editProject(previousName, currentName){
-    const index = projects.map(project => project.name)
-    .indexOf(previousName);
-    projects[index].name = currentName;
+function editProject(index, projectName){
+    projects[index].name = projectName;
 }
 
 export {projects, makeProject, makeTodoItem, addTask, editTask, changeDoneStatus, removeProject, editProject};
