@@ -27,20 +27,15 @@ function addTask(projectName, taskName, description, dueDate, priority, notes){
     }
 }
 
-function editTask(projectName, taskName, description, dueDate, priority, notes){
+function editTask(projectName, taskIndex, name, description, dueDate, priority, notes){
     const project = findProject(projectName);
     if(project){
-        const task = findTask(project, taskName);
-        if(task){
-            task.name = taskName;
-            task.description = description;
-            task.dueDate = dueDate;
-            task.priority = priority;
-            task.notes = notes;
-        }
-        else{
-            console.log("task not found in editTask");
-        }
+        const task = project.todoItems[taskIndex];
+        task.name = name;
+        task.description = description;
+        task.dueDate = dueDate;
+        task.priority = priority;
+        task.notes = notes;
     }
     else{
         console.log("project not found in editTask");
@@ -79,5 +74,9 @@ function editProject(index, projectName){
     projects[index].name = projectName;
 }
 
-export {projects, makeProject, makeTodoItem, addTask, editTask, changeDoneStatus, removeProject, editProject};
+function removeTask(projectIndex, taskIndex){
+    projects[projectIndex].todoItems.splice(taskIndex, 1);
+}
+
+export {projects, makeProject, makeTodoItem, addTask, editTask, changeDoneStatus, removeProject, editProject, removeTask};
 
