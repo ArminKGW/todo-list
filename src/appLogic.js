@@ -2,10 +2,13 @@ const projects = [
     {name: "Default Project", todoItems: []}
 ];
 
-const makeProject = (name) => ({
-    name,
-    todoItems: []
-});
+function makeProject(name){
+    let project = {
+        name,
+        todoItems: []
+    };
+    projects.push(project);
+}
 
 const makeTodoItem = (name, description, dueDate, priority, notes) => ({
     name,
