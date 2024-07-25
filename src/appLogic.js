@@ -77,7 +77,11 @@ function removeProject(projectName){
     projects.splice(index, 1);
 }
 
-//have to also write removeProject and editProject functions
+function editProject(previousName, currentName){
+    const index = projects.map(project => project.name)
+    .indexOf(previousName);
+    projects[index].name = currentName;
+}
 
-export {projects, makeProject, makeTodoItem, addTask, editTask, changeDoneStatus, removeProject};
+export {projects, makeProject, makeTodoItem, addTask, editTask, changeDoneStatus, removeProject, editProject};
 
