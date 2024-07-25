@@ -10,19 +10,18 @@ function makeProject(name){
     projects.push(project);
 }
 
-const makeTodoItem = (name, description, dueDate, priority, notes) => ({
-    name,
-    description,
-    dueDate,
-    priority,
-    notes,
-    isDone: false
-});
-
 function addTask(projectName, taskName, description, dueDate, priority, notes){
     const project = findProject(projectName);
     if(project){
-        project.todoItems.push(makeTodoItem(taskName, description, dueDate, priority, notes));
+        let task = {
+            name: taskName,
+            description,
+            dueDate,
+            priority,
+            notes,
+            isDone: false
+        };
+        project.todoItems.push(task);
         return;
     }
     else{
@@ -81,5 +80,5 @@ function removeTask(projectIndex, taskIndex){
     projects[projectIndex].todoItems.splice(taskIndex, 1);
 }
 
-export {projects, makeProject, makeTodoItem, addTask, editTask, changeDoneStatus, removeProject, editProject, removeTask};
+export {projects, makeProject, addTask, editTask, changeDoneStatus, removeProject, editProject, removeTask};
 
