@@ -1,7 +1,17 @@
-import {projects, makeProject, addTask, editTask, changeDoneStatus} from "./appLogic.js";
+import "./styles.css";
+import {projects, makeProject, addTask, editTask, changeDoneStatus, removeProject, editProject, removeTask} from "./appLogic.js";
+import {handleEvents, renderProjects} from "./DOM.js";
+import trashcanIcon from "./img/trashcan.svg";
+import editIcon from "./img/edit.svg";
 
-projects.push(makeProject("today"));
-addTask("today", "shop", "has to do shopping", "17/10", "High", "", false);
-editTask("today", "shop", "has to do shopping", "7/10", "low", "");
-changeDoneStatus("today", "shop");
-console.log(projects);
+if(module.hot){
+    module.hot.accept("./styles.css", function(){
+        console.log("Applying updated css.");
+    });
+}
+
+renderProjects();
+handleEvents();
+
+console.log(projects,);
+export {trashcanIcon, editIcon};

@@ -1,13 +1,27 @@
+import {addProject} from "./DOM.js";
+
 const projects = [
-    {name: "Default Project", todoItems: []}
+    {name: "Your First Project", todoItems: []}
 ];
 
 function makeProject(name){
+    if(projects.map(project => project.name).includes(name)){
+        return;
+    }
     let project = {
         name,
         todoItems: []
     };
     projects.push(project);
+    addProject(project.name);
+}
+
+function removeProject(index){
+    projects.splice(index, 1);
+}
+
+function editProject(index, projectName){
+    projects[index].name = projectName;
 }
 
 function addTask(projectName, taskName, description, dueDate, priority, notes){
@@ -66,14 +80,6 @@ function changeDoneStatus(projectName, taskName){
     else{
         console.log("project not found in editTask");
     }
-}
-
-function removeProject(index){
-    projects.splice(index, 1);
-}
-
-function editProject(index, projectName){
-    projects[index].name = projectName;
 }
 
 function removeTask(projectIndex, taskIndex){

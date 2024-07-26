@@ -13,21 +13,33 @@
                 <button class="add-project">+New project</button>
             </div>
             <div class="projects">
-                <div class="project">
-                    <div class="project-name">Your First Project</div>
-                </div>
             </div>
         </div>
-        <dialog id="project-dialog">
+        <dialog id="add-project-dialog">
+            <form>
+                <p>
+                    <div>
+                        <label for="add-project-name">Name of project</label>
+                        <input type="text" id="add-project-name" name="add-project-name" required>
+                    </div>
+                    <div class="buttons">
+                        <button class="cancel">Cancel</button>
+                        <button class="confirm">Confirm</button>
+                    </div>
+                </p>
+            </form>
+        </dialog>
+
+        <dialog id="edit-project-dialog">
             <form>
                 <p>
                     <div>
                         <label for="project-name">Name of project</label>
-                        <input type="text" id="project-name" name="project-name">
+                        <input type="text" id="edit-project-name" name="edit-project-name" required>
                     </div>
                     <div class="buttons">
-                        <button class="add-project-cancel">Cancel</button>
-                        <button class="add-project-confirm">Confirm</button>
+                        <button class="cancel">Cancel</button>
+                        <button class="confirm">Confirm</button>
                     </div>
                 </p>
             </form>
@@ -53,19 +65,19 @@
                         <input type="date" id="task-date">
                     </div>
                     <div>
-                        <textarea>Notes</textarea>
+                        <textarea class="task-notes" placeholder="Notes"></textarea>
                     </div>
                     <div>
                         <select>
                             <option value="low">Low</option>
-                            <option value="medium">Medium</option>
+                            <option value="medium" selected>Medium</option>
                             <option value="high">High</option>
                         </select>
                     </div>
                     
                     <div class="buttons">
-                        <button class="add-task-cancel">Cancel</button>
-                        <button class="add-task-confirm">Confirm</button>
+                        <button class="cancel">Cancel</button>
+                        <button class="confirm">Confirm</button>
                     </div>
                 </p>
             </form>
