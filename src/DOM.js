@@ -3,24 +3,27 @@ import {trashcanIcon, editIcon} from "./index.js";
 
 function renderProjects(){
     const projectsContainer = document.querySelector(".projects");
-    for(let project of projects){
-        const projectBox = document.createElement("div");
-        const element = document.createElement("div");
-        element.textContent = project.name;
-        projectBox.appendChild(element);
-        addIconsToProject(projectBox);
+    projectsContainer.textContent = "";
+    projects.forEach((project, index) => {
+        const projectBox = createProjectElement(project, index);
         projectsContainer.appendChild(projectBox);
-    }
+    });
 }
 
 function handleEvents(){
     document.addEventListener("click", (e) => {
-        switch(e.target.className){
+        const target = e.target;
+        switch(target.className){
             case "add-project":
-                openProjectDialog("add");
+                const addDialog = document.querySelector("#add-project-dialog");
+                addDialog.showModal();
                 break;
             case "edit-project":
-                openProjectDialog("edit");
+                const project = target.previousElementSibling;
+                const editDialog = document.querySelector("#edit-project-dialog");
+                console.log(project);
+                editDialog.dataset.projectIndex = project.dataset.column;
+                editDialog.showModal();
                 break;
             case "remove-project":
                 handleRemoveProject();
@@ -33,7 +36,13 @@ function handleEvents(){
                 break;
             case "cancel":
             case "confirm":
-                handleDialogButtons(e);
+                const dialog = target.closest("dialog");
+                if(dialog.id.startsWith("add")){
+                    handleAddDialogs(e);
+                }
+                if(dialog.id.startsWith("edit")){
+                    handleEditDialogs(e, dialog);
+                }
         }
     });
     document.addEventListener("close", (e) => {
@@ -41,14 +50,18 @@ function handleEvents(){
     });
 }
 
-function addProject(projectName){
-    const projectsContainer = document.querySelector(".projects");
+function createProjectElement(project, index){
     const projectBox = document.createElement("div");
+
     const element = document.createElement("div");
-    element.textContent = projectName;
+    element.classList.add("project");
+    element.dataset.column = index;
+    element.textContent = project.name;
+
     projectBox.appendChild(element);
     addIconsToProject(projectBox);
-    projectsContainer.appendChild(projectBox);
+
+    return projectBox;
 }
 
 function addIconsToProject(box){
@@ -57,22 +70,10 @@ function addIconsToProject(box){
     editImg.src = editIcon;
 
     const trashcanImg = new Image();
-    editImg.classList.add("remove-project");
+    trashcanImg.classList.add("remove-project");
     trashcanImg.src = trashcanIcon;
 
     box.append(editImg, trashcanImg);
-}
-
-function openProjectDialog(mode){
-    if(mode === "add"){
-        const addDialog = document.querySelector("#add-project-dialog");
-        addDialog.showModal();
-    }
-    
-    if(mode === "edit"){
-        const editDialog = document.querySelector("#edit-project-dialog");
-        editDialog.showModal();
-    }  
 }
 
 function handleAddProject(){
@@ -81,15 +82,28 @@ function handleAddProject(){
     console.log(projects);
 }
 
-function handleEditProject(){
-    editProject();
+function addProjectToDOM(project){
+    const projectsContainer = document.querySelector(".projects");
+    const index = projects.map(item => item.name).indexOf(project.name);
+    const projectBox = createProjectElement(project, index);
+    projectsContainer.appendChild(projectBox);
 }
+
+function handleEditProject(projectIndex){
+    const projectName = document.querySelector("#edit-project-name");
+    editProject(projectIndex, projectName.value);
+    console.log(projects);
+}
+
+// function editProjectInDOM(){
+
+// }
 
 function handleRemoveProject(){
 
 }
 
-function handleDialogButtons(e){
+function handleAddDialogs(e){
     const Btn = e.target;
     const dialog = Btn.closest("dialog");
     
@@ -99,15 +113,31 @@ function handleDialogButtons(e){
             if(dialog.id === "add-project-dialog"){
                 handleAddProject();
             }
+            // else if(dialog.id === "task-dialog"){
+            //     const taskName = document.querySelector("#task-name");
+            //     const taskDescription = document.querySelector("#task-description");
+            //     const taskDate = document.querySelector("#task-date");
+            //     const taskPriority = document.querySelector("dialog select");
+            //     const taskNotes = document.querySelector(".task-notes");
+            // }
+            dialog.close()
+        }
+    }
+    else{
+        dialog.close();
+    }
+    resetForm(dialog);
+}
+
+function handleEditDialogs(e, dialog){
+    const Btn = e.target;
+    const projectIndex = dialog.dataset.projectIndex;
+
+    if(Btn.classList.contains("confirm")){
+        if(dialog.querySelector("form").checkValidity()){
+            e.preventDefault();
             if(dialog.id === "edit-project-dialog"){
-                handleEditProject();
-            }
-            else if(dialog.id === "task-dialog"){
-                const taskName = document.querySelector("#task-name");
-                const taskDescription = document.querySelector("#task-description");
-                const taskDate = document.querySelector("#task-date");
-                const taskPriority = document.querySelector("dialog select");
-                const taskNotes = document.querySelector(".task-notes");
+                handleEditProject(projectIndex);
             }
             dialog.close()
         }
@@ -133,4 +163,4 @@ function openTaskDialog(){
 
 
 
-export {handleEvents, renderProjects, addProject};
+export {handleEvents, renderProjects, addProjectToDOM, editProjectInDOM};
