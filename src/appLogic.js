@@ -1,4 +1,4 @@
-import {addProjectToDOM, editProjectInDOM, removeProjectInDOM} from "./DOM.js";
+import {addProjectToDOM, editProjectInDOM, removeProjectInDOM, addTaskToDOM, removeTaskInDOM} from "./DOM.js";
 
 const projects = [
     {name: "Your First Project", todoItems: []}
@@ -38,6 +38,7 @@ function addTask(projectName, taskName, description, dueDate, priority, notes){
             isDone: false
         };
         project.todoItems.push(task);
+        addTaskToDOM(task, project.todoItems.indexOf(task));
         return;
     }
     else{
@@ -84,8 +85,12 @@ function changeDoneStatus(projectName, taskName){
     }
 }
 
-function removeTask(projectIndex, taskIndex){
-    projects[projectIndex].todoItems.splice(taskIndex, 1);
+function removeTask(projectName, taskIndex){
+    const projectIndex = projects.findIndex(project => project.name === projectName);
+    if(projectIndex !== -1){
+        projects[projectIndex].todoItems.splice(taskIndex, 1);
+    }
+    removeTaskInDOM(taskIndex);
 }
 
 export {projects, makeProject, addTask, editTask, changeDoneStatus, removeProject, editProject, removeTask};

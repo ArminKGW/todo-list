@@ -49,26 +49,60 @@
             <div class="todos"></div>
             <button class="add-task">+Add task</button>
         </div>
-        <dialog id="task-dialog">
+        <dialog id="add-task-dialog">
             <form>
                 <p>
                     <div>
                         <label for="task-name">Title</label>
-                        <input type="text" id="task-name" required>
+                        <input type="text" id="add-task-name" required>
                     </div>
                     <div>
                         <label for="task-description">Description</label>
-                        <input type="text" id="task-description">
+                        <input type="text" id="add-task-description">
                     </div>
                     <div>
                         <label for="task-date">Due date</label>
-                        <input type="date" id="task-date">
+                        <input type="date" id="add-task-date">
                     </div>
                     <div>
-                        <textarea class="task-notes" placeholder="Notes"></textarea>
+                        <textarea class="add-task-notes" placeholder="Notes"></textarea>
                     </div>
                     <div>
-                        <select>
+                        <label for="add-task-priority">Priority</label>
+                        <select id="add-task-priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    
+                    <div class="buttons">
+                        <button class="cancel">Cancel</button>
+                        <button class="confirm">Confirm</button>
+                    </div>
+                </p>
+            </form>
+        </dialog>
+        <dialog id="edit-task-dialog">
+            <form>
+                <p>
+                    <div>
+                        <label for="task-name">Title</label>
+                        <input type="text" id="edit-task-name" required>
+                    </div>
+                    <div>
+                        <label for="task-description">Description</label>
+                        <input type="text" id="edit-task-description">
+                    </div>
+                    <div>
+                        <label for="task-date">Due date</label>
+                        <input type="date" id="edit-task-date">
+                    </div>
+                    <div>
+                        <textarea class="edit-task-notes" placeholder="Notes"></textarea>
+                    </div>
+                    <div>
+                        <select class="edit-task-priority">
                             <option value="low">Low</option>
                             <option value="medium" selected>Medium</option>
                             <option value="high">High</option>

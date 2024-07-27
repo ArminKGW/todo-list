@@ -2,7 +2,45 @@ body{
     background-color: rgb(225, 223, 223);
 }
 
+#container{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.sidebar{
+    background-color: rgb(29, 132, 29);
+}
+
+.project{
+    cursor: pointer;
+}
+
 img{
     width: 20px;
     cursor: pointer;
+}
+
+input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+}
+
+.priority{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: inherit;
+}
+
+.low{
+    border: 2px solid blue;
+}
+
+.medium{
+    border: 2px solid orange;
+}
+
+.high{
+    border: 2px solid red;
 }
