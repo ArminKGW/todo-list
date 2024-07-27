@@ -1,4 +1,4 @@
-import {projects, makeProject, addTask, editTask, editProject, changeDoneStatus} from "./appLogic.js";
+import {projects, makeProject, editProject, removeProject, addTask, editTask, changeDoneStatus} from "./appLogic.js";
 import {trashcanIcon, editIcon} from "./index.js";
 
 function renderProjects(){
@@ -19,13 +19,15 @@ function handleEvents(){
                 addDialog.showModal();
                 break;
             case "edit-project":
-                const project = target.previousElementSibling;
+                const projectToEdit = target.previousElementSibling;
                 const editDialog = document.querySelector("#edit-project-dialog");
-                editDialog.dataset.projectIndex = project.dataset.column;
+                editDialog.dataset.projectIndex = projectToEdit.dataset.column;
                 editDialog.showModal();
                 break;
             case "remove-project":
-                handleRemoveProject();
+                const edit = target.previousElementSibling;
+                const projectToRemove = edit.previousElementSibling;
+                removeProject(projectToRemove.dataset.column);
                 break;
             case "add-task":
                 handleAddTask();
@@ -51,6 +53,7 @@ function handleEvents(){
 
 function createProjectElement(project, index){
     const projectBox = document.createElement("div");
+    projectBox.classList.add("project-box");
 
     const element = document.createElement("div");
     element.classList.add("project");
@@ -97,14 +100,19 @@ function editProjectInDOM(index, name){
     const projectList = document.querySelectorAll(".project");
     projectList.forEach(project => {
         if(project.dataset.column === index){
-            console.log(project);
             project.textContent = name;
         }
     });
 }
 
-function handleRemoveProject(){
-    
+function removeProjectInDOM(index){
+    const projectList = document.querySelectorAll(".project");
+    projectList.forEach(project => {
+        if(project.dataset.column === index){
+            const projectBox = project.closest(".project-box");
+            projectBox.remove();
+        }
+    });
 }
 
 function handleAddDialogs(e){
@@ -167,4 +175,4 @@ function openTaskDialog(){
 
 
 
-export {handleEvents, renderProjects, addProjectToDOM, editProjectInDOM};
+export {handleEvents, renderProjects, addProjectToDOM, editProjectInDOM, removeProjectInDOM};

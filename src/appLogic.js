@@ -1,4 +1,4 @@
-import {addProjectToDOM, editProjectInDOM} from "./DOM.js";
+import {addProjectToDOM, editProjectInDOM, removeProjectInDOM} from "./DOM.js";
 
 const projects = [
     {name: "Your First Project", todoItems: []}
@@ -16,13 +16,14 @@ function makeProject(name){
     addProjectToDOM(project);
 }
 
-function removeProject(index){
-    projects.splice(index, 1);
-}
-
 function editProject(index, projectName){
     projects[index].name = projectName;
     editProjectInDOM(index, projectName);
+}
+
+function removeProject(index){
+    projects.splice(index, 1);
+    removeProjectInDOM(index);
 }
 
 function addTask(projectName, taskName, description, dueDate, priority, notes){
