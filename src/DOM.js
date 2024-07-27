@@ -21,7 +21,6 @@ function handleEvents(){
             case "edit-project":
                 const project = target.previousElementSibling;
                 const editDialog = document.querySelector("#edit-project-dialog");
-                console.log(project);
                 editDialog.dataset.projectIndex = project.dataset.column;
                 editDialog.showModal();
                 break;
@@ -92,15 +91,20 @@ function addProjectToDOM(project){
 function handleEditProject(projectIndex){
     const projectName = document.querySelector("#edit-project-name");
     editProject(projectIndex, projectName.value);
-    console.log(projects);
 }
 
-// function editProjectInDOM(){
-
-// }
+function editProjectInDOM(index, name){
+    const projectList = document.querySelectorAll(".project");
+    projectList.forEach(project => {
+        if(project.dataset.column === index){
+            console.log(project);
+            project.textContent = name;
+        }
+    });
+}
 
 function handleRemoveProject(){
-
+    
 }
 
 function handleAddDialogs(e){

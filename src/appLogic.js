@@ -22,7 +22,7 @@ function removeProject(index){
 
 function editProject(index, projectName){
     projects[index].name = projectName;
-    editProjectInDOM(index);
+    editProjectInDOM(index, projectName);
 }
 
 function addTask(projectName, taskName, description, dueDate, priority, notes){
