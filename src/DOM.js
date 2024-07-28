@@ -62,16 +62,13 @@ function handleEvents(){
                 }
         }
     });
-    document.addEventListener("close", (e) => {
-        document.activeElement.blur();
-    });
 }
 
 function createProjectElement(project, index){
     const projectBox = document.createElement("div");
     projectBox.classList.add("project-box");
 
-    const element = document.createElement("div");
+    const element = document.createElement("a");
     element.classList.add("project");
     element.dataset.column = index;
     element.textContent = project.name;
@@ -102,12 +99,12 @@ function addIconsToProject(box){
 function handleAddDialogs(e){
     const Btn = e.target;
     const dialog = Btn.closest("dialog");
+    e.preventDefault();
     
 
     if(dialog.id === "add-project-dialog"){
         if(Btn.classList.contains("confirm")){
             if(dialog.querySelector("form").checkValidity()){
-                e.preventDefault();
                 handleAddProject();
                 dialog.close();
             }
@@ -119,7 +116,6 @@ function handleAddDialogs(e){
     else if(dialog.id === "add-task-dialog"){
         if(Btn.classList.contains("confirm")){
             if(dialog.querySelector("form").checkValidity()){
-                e.preventDefault();
                 handleAddTask();
                 dialog.close();
             }
@@ -135,32 +131,25 @@ function handleEditDialogs(e, dialog){
     const Btn = e.target;
     const projectIndex = dialog.dataset.projectDialogIndex;
     const taskIndex = dialog.dataset.taskDialogIndex;
+    e.preventDefault();
 
-    if(dialog.id === "edit-project-dialog"){
-        if(Btn.classList.contains("confirm")){
-            if(dialog.querySelector("form").checkValidity()){
-                e.preventDefault();
+    if(dialog.id === "edit-project-dialog" && Btn.classList.contains("confirm")){
+        if(dialog.querySelector("form").checkValidity()){
                 handleEditProject(+projectIndex);
                 dialog.close();
-            }
-        }
-        else{
-            dialog.close();
         }
     }
-    else if(dialog.id === "edit-task-dialog"){
-        if(Btn.classList.contains("confirm")){
-            if(dialog.querySelector("form").checkValidity()){
-                e.preventDefault();
+    else if(dialog.id === "edit-task-dialog" && Btn.classList.contains("confirm")){
+        if(dialog.querySelector("form").checkValidity()){
                 const title = document.querySelector("h1");
                 const index = findProjectIndexByName(title.textContent);
                 handleEditTask(index, +taskIndex);
                 dialog.close();
-            }
         }
-        else{
-            dialog.close();
-        }
+    }
+
+    if(Btn.classList.contains("cancel")){
+        dialog.close();
     }
 }
 
