@@ -1,4 +1,4 @@
-import {addProjectToDOM, editProjectInDOM, removeProjectInDOM, addTaskToDOM, removeTaskInDOM} from "./DOM.js";
+import {addProjectToDOM, editProjectInDOM, removeProjectInDOM, addTaskToDOM, removeTaskInDOM, editTaskInDOM} from "./DOM.js";
 
 const projects = [
     {name: "Your First Project", todoItems: []}
@@ -51,10 +51,12 @@ function editTask(projectName, taskIndex, name, description, dueDate, priority, 
     if(project){
         const task = project.todoItems[taskIndex];
         task.name = name;
+        console.log(task.name);
         task.description = description;
         task.dueDate = dueDate;
         task.priority = priority;
         task.notes = notes;
+        editTaskInDOM(taskIndex, task);
     }
     else{
         console.log("project not found in editTask");
@@ -86,12 +88,26 @@ function changeDoneStatus(projectName, taskName){
 }
 
 function removeTask(projectName, taskIndex){
-    const projectIndex = projects.findIndex(project => project.name === projectName);
+    const projectIndex = findProjectIndexByName(projectName);
     if(projectIndex !== -1){
         projects[projectIndex].todoItems.splice(taskIndex, 1);
     }
     removeTaskInDOM(taskIndex);
 }
 
-export {projects, makeProject, addTask, editTask, changeDoneStatus, removeProject, editProject, removeTask};
+function findProjectIndexByName(projectName){
+    const projectIndex = projects.findIndex(project => project.name === projectName);
+    if(projectIndex !== -1){
+        return projectIndex;
+    }
+}
+
+function findProjectNameByIndex(projectIndex){
+    const projectName = projects[projectIndex].name;
+    if(projectName){
+        return projectName;
+    }
+}
+
+export {projects, makeProject, addTask, editTask, changeDoneStatus, removeProject, editProject, removeTask, findProjectIndexByName, findProjectNameByIndex};
 

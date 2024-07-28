@@ -1,4 +1,4 @@
-import {projects, makeProject, editProject, removeProject, addTask, editTask, removeTask, changeDoneStatus} from "./appLogic.js";
+import {projects, makeProject, editProject, removeProject, addTask, editTask, removeTask, changeDoneStatus, findProjectIndexByName, findProjectNameByIndex} from "./appLogic.js";
 import {trashcanIcon, editIcon} from "./index.js";
 
 function renderProjects(){
@@ -26,25 +26,30 @@ function handleEvents(){
                 const editProjectDialog = document.querySelector("#edit-project-dialog");
                 const inputProjectName = document.querySelector("#edit-project-name");
                 inputProjectName.value = projectToEdit.textContent;
-                editProjectDialog.dataset.projectIndex = projectToEdit.dataset.column;
+                editProjectDialog.dataset.projectDialogIndex = projectToEdit.dataset.column;
                 editProjectDialog.showModal();
                 break;
             case "remove-project":
                 const editProject = target.previousElementSibling;
                 const projectToRemove = editProject.previousElementSibling;
-                removeProject(projectToRemove.dataset.column);
+                removeProject(+projectToRemove.dataset.column);
                 break;
             case "add-task":
                 const addTaskDialog = document.querySelector("#add-task-dialog");
                 addTaskDialog.showModal();
                 break;
             case "edit-task":
-                openTaskDialog();
+                const editTaskDialog = document.querySelector("#edit-task-dialog");
+                const box = target.closest(".task-box");
+                const h1 = document.querySelector("h1");
+                initializeTaskForm(h1.textContent, box.dataset.taskIndex);
+                editTaskDialog.dataset.taskDialogIndex = box.dataset.taskIndex; 
+                editTaskDialog.showModal();
                 break;
             case "remove-task":
                 const taskBox = target.closest(".task-box");
                 const title = document.querySelector("h1");
-                removeTask(title.textContent, taskBox.dataset.taskIndex);
+                removeTask(title.textContent, +taskBox.dataset.taskIndex);
                 break;
             case "cancel":
             case "confirm":
@@ -70,6 +75,11 @@ function createProjectElement(project, index){
     element.classList.add("project");
     element.dataset.column = index;
     element.textContent = project.name;
+
+    if(index === 0){
+        const title = document.querySelector("h1");
+        title.textContent = project.name;
+    }
 
     projectBox.appendChild(element);
     addIconsToProject(projectBox);
@@ -123,13 +133,28 @@ function handleAddDialogs(e){
 
 function handleEditDialogs(e, dialog){
     const Btn = e.target;
-    const projectIndex = dialog.dataset.projectIndex;
+    const projectIndex = dialog.dataset.projectDialogIndex;
+    const taskIndex = dialog.dataset.taskDialogIndex;
 
     if(dialog.id === "edit-project-dialog"){
         if(Btn.classList.contains("confirm")){
             if(dialog.querySelector("form").checkValidity()){
                 e.preventDefault();
-                handleEditProject(projectIndex);
+                handleEditProject(+projectIndex);
+                dialog.close();
+            }
+        }
+        else{
+            dialog.close();
+        }
+    }
+    else if(dialog.id === "edit-task-dialog"){
+        if(Btn.classList.contains("confirm")){
+            if(dialog.querySelector("form").checkValidity()){
+                e.preventDefault();
+                const title = document.querySelector("h1");
+                const index = findProjectIndexByName(title.textContent);
+                handleEditTask(index, +taskIndex);
                 dialog.close();
             }
         }
@@ -142,12 +167,14 @@ function handleEditDialogs(e, dialog){
 function handleAddProject(){
     const projectName = document.querySelector("#add-project-name");
     makeProject(projectName.value);
-    console.log(projects);
 }
 
 function addProjectToDOM(project){
     const projectsContainer = document.querySelector(".projects");
     const index = projects.map(item => item.name).indexOf(project.name);
+    if(index === 0){
+        createAddTask();
+    }
     const projectBox = createProjectElement(project, index);
     projectsContainer.appendChild(projectBox);
 }
@@ -159,12 +186,14 @@ function handleEditProject(projectIndex){
 
 function editProjectInDOM(index, name){
     const project = document.querySelector(`.project[data-column="${index}"]`);
+    updateAfterEditProject(name);
     project.textContent = name;
 }
 
 function removeProjectInDOM(index){
     const project = document.querySelector(`.project[data-column="${index}"]`);
     const projectBox = project.closest(".project-box");
+    updateAfterRemoveProject(index);
     projectBox.remove();
 }
 
@@ -178,6 +207,32 @@ function showProject(project){
         const taskBox = createTaskElement(task, index);
         taskContainer.appendChild(taskBox);
     });
+}
+
+function updateAfterEditProject(name){
+    const title = document.querySelector("h1");
+    title.textContent = name;
+}
+
+function updateAfterRemoveProject(index){
+    const title = document.querySelector("h1");
+    
+    if(index === 0){
+        title.textContent = "";
+        const addTaskBtn = document.querySelector(".add-task");
+        addTaskBtn.remove();
+        return;
+    }
+    const name = findProjectNameByIndex(index - 1);
+    title.textContent = name;
+}
+
+function createAddTask(){
+    const container = document.querySelector(".todos");
+    const addTaskBtn = document.createElement("button");
+    addTaskBtn.classList.add("add-task");
+    addTaskBtn.textContent = "+Add task";
+    container.appendChild(addTaskBtn);
 }
 
 function handleAddTask(){
@@ -197,6 +252,28 @@ function addTaskToDOM(task, index){
     taskContainer.appendChild(taskBox);
 }
 
+function handleEditTask(projectIndex, taskIndex){
+    const projectName = findProjectNameByIndex(projectIndex);
+    const name = document.querySelector("#edit-task-name");
+    const description = document.querySelector("#edit-task-description");
+    const date = document.querySelector("#edit-task-date");
+    const notes = document.querySelector(".edit-task-notes");
+    const priority = document.querySelector(".edit-task-priority");
+    editTask(projectName, taskIndex, name.value, description.value, date.value, priority.value, notes.value);
+}
+
+function editTaskInDOM(taskIndex, task){
+    console.log(projects);
+    const taskBox = document.querySelector(`.task-box[data-task-index="${taskIndex}"]`);
+    const name = taskBox.querySelector(".task-name");
+    const date = taskBox.querySelector(".task-date");
+    const priority = taskBox.querySelector(".priority");
+    console.log(task.name);
+    name.textContent = task.name;
+    date.textContent = task.dueDate;
+    priority.classList.replace(priority.classList[0], task.priority.toLowerCase());
+}
+
 function removeTaskInDOM(taskIndex){
     const taskBox = document.querySelector(`.task-box[data-task-index="${taskIndex}"`);
     taskBox.remove();
@@ -211,8 +288,10 @@ function createTaskElement(task, index){
     const taskPriority = document.createElement("div");
     taskPriority.classList.add(task.priority.toLowerCase(), "priority");
     const taskName = document.createElement("div");
+    taskName.classList.add("task-name");
     taskName.textContent = task.name;
     const taskDueDate = document.createElement("div");
+    taskDueDate.classList.add("task-date");
     taskDueDate.textContent = task.dueDate;
     taskBox.append(checkbox, taskPriority, taskName, taskDueDate);
     addIconsToTask(taskBox);
@@ -242,5 +321,24 @@ function resetForm(parent){
     }
 }
 
+function initializeTaskForm(projectName, taskIndex){
+    const projectIndex = findProjectIndexByName(projectName);
+    const dialogName = document.querySelector("#edit-task-name");
+    const dialogDescription = document.querySelector("#edit-task-description");
+    const dialogDueDate = document.querySelector("#edit-task-date");
+    const dialogNotes = document.querySelector(".edit-task-notes");
+    const dialogPriority = document.querySelector(".edit-task-priority");
+    const name = projects[projectIndex].todoItems[taskIndex].name;
+    const description = projects[projectIndex].todoItems[taskIndex].description;
+    const date = projects[projectIndex].todoItems[taskIndex].dueDate;
+    const notes = projects[projectIndex].todoItems[taskIndex].notes;
+    const priority = projects[projectIndex].todoItems[taskIndex].priority;
+    dialogName.value = name;
+    dialogDescription.value = description;
+    dialogDueDate.value = date;
+    dialogNotes.value = notes;
+    dialogPriority.value = priority;
+}
 
-export {handleEvents, renderProjects, addProjectToDOM, editProjectInDOM, removeProjectInDOM, addTaskToDOM, removeTaskInDOM};
+
+export {handleEvents, renderProjects, addProjectToDOM, editProjectInDOM, removeProjectInDOM, addTaskToDOM, removeTaskInDOM, editTaskInDOM};

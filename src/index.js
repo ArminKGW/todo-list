@@ -13,5 +13,5 @@ if(module.hot){
 renderProjects();
 handleEvents();
 
-console.log(projects,);
+console.log(projects);
 export {trashcanIcon, editIcon};
