@@ -22,7 +22,8 @@ function handleEvents(){
                 addProjectDialog.showModal();
                 break;
             case "edit-project":
-                const projectToEdit = target.previousElementSibling;
+                const editBox = target.closest(".project-box");
+                const projectToEdit = editBox.querySelector(".project");
                 const editProjectDialog = document.querySelector("#edit-project-dialog");
                 const inputProjectName = document.querySelector("#edit-project-name");
                 inputProjectName.value = projectToEdit.textContent;
@@ -30,8 +31,8 @@ function handleEvents(){
                 editProjectDialog.showModal();
                 break;
             case "remove-project":
-                const editProject = target.previousElementSibling;
-                const projectToRemove = editProject.previousElementSibling;
+                const removeBox = target.closest(".project-box");
+                const projectToRemove = removeBox.querySelector(".project");
                 removeProject(+projectToRemove.dataset.column);
                 break;
             case "add-task":
@@ -86,6 +87,8 @@ function createProjectElement(project, index){
 
 function addIconsToProject(box){
     const editImg = new Image();
+    const iconContainer = document.createElement("div");
+    iconContainer.classList.add("icon-container");
     editImg.classList.add("edit-project");
     editImg.src = editIcon;
 
@@ -93,7 +96,8 @@ function addIconsToProject(box){
     trashcanImg.classList.add("remove-project");
     trashcanImg.src = trashcanIcon;
 
-    box.append(editImg, trashcanImg);
+    iconContainer.append(editImg, trashcanImg);
+    box.appendChild(iconContainer);
 }
 
 function handleAddDialogs(e){
@@ -218,10 +222,16 @@ function updateAfterRemoveProject(index){
 
 function createAddTask(){
     const container = document.querySelector(".todos");
-    const addTaskBtn = document.createElement("button");
-    addTaskBtn.classList.add("add-task");
-    addTaskBtn.textContent = "+Add task";
-    container.appendChild(addTaskBtn);
+    const addTaskContainer = document.createElement("button");
+    addTaskContainer.classList.add("add-task");
+    const plusSign = document.createElement("spin");
+    plusSign.classList.add("add-task");
+    plusSign.textContent = "+";
+    const text = document.createElement("div");
+    text.classList.add("add-task");
+    text.textContent = "Add task";
+    addTaskContainer.append(plusSign, text);
+    container.appendChild(addTaskContainer);
 }
 
 function handleAddTask(){
