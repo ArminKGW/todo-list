@@ -221,7 +221,7 @@ function updateAfterRemoveProject(index){
 }
 
 function createAddTask(){
-    const container = document.querySelector(".todos");
+    const container = document.querySelector(".content");
     const addTaskContainer = document.createElement("button");
     addTaskContainer.classList.add("add-task");
     const plusSign = document.createElement("spin");
