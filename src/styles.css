@@ -1,19 +1,132 @@
+:root{
+    
+}
+
 body{
     background-color: rgb(225, 223, 223);
+    margin: 0;
 }
 
 #container{
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 5.5fr;
 }
 
 .sidebar{
-    background-color: rgb(29, 132, 29);
+    background-color: rgb(57, 185, 195);
+    height: 100vh;
+    padding: 0 8px;
+}
+
+.sidebar-header{
+    display: flex;
+    height: 10%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(35, 154, 163);
+}
+
+button.add-project{
+    height: 36px;
+    width: 36px;
+    border-radius: 10px;
+    margin-right: 12px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 2px 8px;
+}
+
+
+.project-box{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
 }
 
 .project{
     cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.content{
+    padding: 64px 50px;
+}
+
+.task-box{
+    height: 80px;
+    border-bottom: 1px solid rgb(202, 197, 197);
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: min-content 1fr 40px;
+}
+
+.left-container{
+    display: flex;
+    align-items: center;
+}
+
+.mid-container{
+    display: flex;
+    align-items: center;
+}
+
+.mid-container > *{
+    margin-left: 32px;
+}
+
+.right-container{
+    justify-self: end;
+    align-self: center;
+}
+
+.task-name{
+    font-size: 24px;
+}
+
+.task-date{
+    color: rgb(35, 181, 35);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.add-task{
+    display: flex;
+    align-items: center;
+    background-color: inherit;
+    gap: 16px;
+    font-size: 22px;
+    color: rgb(96, 95, 95);
+    padding: 0;
+}
+
+spin.add-task{
+    font-size: 3rem;
+    color: rgb(194, 84, 6);
+    margin-bottom: 4px;
+}
+
+dialog button, dialog input{
+    height: 40px;
+    width: 250px;
+    border-radius: 6px;
+    border: 0;
+    font-size: 20px;
+}
+
+dialog .input{
+    background-color: rgb(72, 70, 70);
+}
+
+dialog button{
+    background-color: rgb(30, 110, 0);
+    font-weight: 700;
+}
+
+dialog button:hover{
+    background-color: rgb(31, 108, 2);
+    color: rgb(200, 199, 199);
 }
 
 img{
@@ -43,4 +156,9 @@ input[type="checkbox"]{
 
 .high{
     border: 2px solid red;
+}
+
+button{
+    cursor: pointer;
+    border: 0;
 }

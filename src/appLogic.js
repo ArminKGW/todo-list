@@ -1,7 +1,7 @@
 import {addProjectToDOM, editProjectInDOM, removeProjectInDOM, addTaskToDOM, removeTaskInDOM, editTaskInDOM} from "./DOM.js";
 
 const projects = [
-    {name: "Your First Project", todoItems: []}
+    {name: "Your Project's Name", todoItems: []}
 ];
 
 function makeProject(name){

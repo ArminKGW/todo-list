@@ -88,7 +88,7 @@ function createProjectElement(project, index){
 function addIconsToProject(box){
     const editImg = new Image();
     const iconContainer = document.createElement("div");
-    iconContainer.classList.add("icon-container");
+    iconContainer.classList.add("project-icon-container");
     editImg.classList.add("edit-project");
     editImg.src = editIcon;
 
@@ -280,7 +280,15 @@ function removeTaskInDOM(taskIndex){
 
 function createTaskElement(task, index){
     const taskBox = document.createElement("div");
+    const firstRow = document.createElement("div");
+    const leftContainer = document.createElement("div"); 
+    const rightContainer = document.createElement("div"); 
+    const midContainer = document.createElement("div");      
     taskBox.classList.add("task-box");
+    firstRow.classList.add("first-row");
+    leftContainer.classList.add("left-container");
+    midContainer.classList.add("mid-container");
+    rightContainer.classList.add("right-container");
     taskBox.dataset.taskIndex = index;
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
@@ -292,13 +300,17 @@ function createTaskElement(task, index){
     const taskDueDate = document.createElement("div");
     taskDueDate.classList.add("task-date");
     taskDueDate.textContent = task.dueDate;
-    taskBox.append(checkbox, taskPriority, taskName, taskDueDate);
-    addIconsToTask(taskBox);
+    leftContainer.append(taskPriority, checkbox);
+    midContainer.append(taskName, taskDueDate);
+    addIconsToTask(rightContainer);
+    taskBox.append(leftContainer, midContainer, rightContainer);
     return taskBox;
 }
 
 function addIconsToTask(box){
     const editImg = new Image();
+    const iconContainer = document.createElement("div");
+    iconContainer.classList.add("task-icon-container");
     editImg.classList.add("edit-task");
     editImg.src = editIcon;
 
@@ -306,7 +318,8 @@ function addIconsToTask(box){
     trashcanImg.classList.add("remove-task");
     trashcanImg.src = trashcanIcon;
 
-    box.append(editImg, trashcanImg);
+    iconContainer.append(editImg, trashcanImg);
+    box.appendChild(iconContainer);
 }
 
 function resetForm(parent){
