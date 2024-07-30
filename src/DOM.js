@@ -103,28 +103,31 @@ function addIconsToProject(box){
 function handleAddDialogs(e){
     const Btn = e.target;
     const dialog = Btn.closest("dialog");
-    e.preventDefault();
     
 
     if(dialog.id === "add-project-dialog"){
         if(Btn.classList.contains("confirm")){
             if(dialog.querySelector("form").checkValidity()){
+                e.preventDefault();
                 handleAddProject();
                 dialog.close();
             }
         }
         else{
+            e.preventDefault();
             dialog.close();
         }
     }
     else if(dialog.id === "add-task-dialog"){
         if(Btn.classList.contains("confirm")){
             if(dialog.querySelector("form").checkValidity()){
+                e.preventDefault();
                 handleAddTask();
                 dialog.close();
             }
         }
         else{
+            e.preventDefault();
             dialog.close();
         }
     }
@@ -135,16 +138,17 @@ function handleEditDialogs(e, dialog){
     const Btn = e.target;
     const projectIndex = dialog.dataset.projectDialogIndex;
     const taskIndex = dialog.dataset.taskDialogIndex;
-    e.preventDefault();
 
     if(dialog.id === "edit-project-dialog" && Btn.classList.contains("confirm")){
         if(dialog.querySelector("form").checkValidity()){
+                e.preventDefault();
                 handleEditProject(+projectIndex);
                 dialog.close();
         }
     }
     else if(dialog.id === "edit-task-dialog" && Btn.classList.contains("confirm")){
         if(dialog.querySelector("form").checkValidity()){
+                e.preventDefault();
                 const title = document.querySelector("h1");
                 const index = findProjectIndexByName(title.textContent);
                 handleEditTask(index, +taskIndex);
@@ -153,6 +157,7 @@ function handleEditDialogs(e, dialog){
     }
 
     if(Btn.classList.contains("cancel")){
+        e.preventDefault();
         dialog.close();
     }
 }

@@ -17,31 +17,31 @@
         </div>
         <dialog id="add-project-dialog">
             <form>
-                <p>
-                    <div>
+                <div class="form-grid-container">
+                    <p>
                         <label for="add-project-name">Name of project</label>
                         <input type="text" id="add-project-name" name="add-project-name" required>
-                    </div>
-                    <div class="buttons">
-                        <button class="cancel">Cancel</button>
+                    </p>
+                    <p class="buttons">
                         <button class="confirm">Confirm</button>
-                    </div>
-                </p>
+                        <button class="cancel">Cancel</button>
+                    </p>
+                </div>
             </form>
         </dialog>
 
         <dialog id="edit-project-dialog">
             <form>
-                <p>
-                    <div>
-                        <label for="project-name">Name of project</label>
+                <div class="form-grid-container">
+                    <p>
+                        <label for="edit-project-name">Name of project</label>
                         <input type="text" id="edit-project-name" name="edit-project-name" required>
-                    </div>
-                    <div class="buttons">
-                        <button class="cancel">Cancel</button>
+                    </p>
+                    <p class="buttons">
                         <button class="confirm">Confirm</button>
-                    </div>
-                </p>
+                        <button class="cancel">Cancel</button>
+                    </p>
+                </div>
             </form>
         </dialog>
         <div class="content">
@@ -68,7 +68,7 @@
                         <input type="date" id="add-task-date">
                     </div>
                     <div>
-                        <textarea class="add-task-notes" placeholder="Notes"></textarea>
+                        <textarea class="add-task-notes" rows="10" cols="30" placeholder="Notes"></textarea>
                     </div>
                     <div>
                         <label for="add-task-priority">Priority</label>
@@ -80,8 +80,8 @@
                     </div>
                     
                     <div class="buttons">
-                        <button class="cancel">Cancel</button>
                         <button class="confirm">Confirm</button>
+                        <button class="cancel">Cancel</button>
                     </div>
                 </p>
             </form>
@@ -113,8 +113,8 @@
                     </div>
                     
                     <div class="buttons">
-                        <button class="cancel">Cancel</button>
                         <button class="confirm">Confirm</button>
+                        <button class="cancel">Cancel</button>
                     </div>
                 </p>
             </form>

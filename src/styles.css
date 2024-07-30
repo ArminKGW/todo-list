@@ -1,5 +1,5 @@
 :root{
-    
+    --input-bc: rgb(196, 190, 190);
 }
 
 body{
@@ -107,6 +107,12 @@ spin.add-task{
     margin-bottom: 4px;
 }
 
+.form-grid-container{
+    height: 200px;
+    display: grid;
+    align-items: center;
+}
+
 dialog button, dialog input{
     height: 40px;
     width: 250px;
@@ -115,18 +121,83 @@ dialog button, dialog input{
     font-size: 20px;
 }
 
-dialog .input{
-    background-color: rgb(72, 70, 70);
+#add-task-dialog label,
+#edit-task-dialog label{
+    display: block;
 }
 
-dialog button{
+dialog input{
+    background-color: var(--input-bc);
+    margin-bottom: 12px;
+}
+
+.confirm, .cancel{
+    font-weight: 700;
+    color: rgb(200, 199, 199);
+}
+
+button.confirm{
     background-color: rgb(30, 110, 0);
+}
+
+button.cancel{
+    background-color: rgb(234, 60, 60);
+}
+
+#add-task-dialog .buttons,
+#edit-task-dialog .buttons{
+    margin-top: 24px;
+}
+
+select{
+    width: 250px;
+    height: 40px;
+    border-radius: 6px;
+    border: 0;
+    background-color: var(--input-bc);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+select option{
+    background-color: white;
     font-weight: 700;
 }
 
-dialog button:hover{
-    background-color: rgb(31, 108, 2);
-    color: rgb(200, 199, 199);
+option[value="low"]{
+    color: blue;
+}
+
+option[value="medium"]{
+    color: orange;
+}
+
+option[value="high"]{
+    color: red;
+}
+
+label{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+input:hover{
+    background-color: rgb(207, 200, 200);
+}
+
+select:hover{
+    background-color: rgb(207, 200, 200);
+}
+
+.confirm:hover{
+    background-color: rgb(36, 120, 6);
+    color: black;
+}
+
+.cancel:hover{
+    background-color: rgb(251, 67, 67);
+    color: black;
 }
 
 img{
