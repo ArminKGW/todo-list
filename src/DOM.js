@@ -191,8 +191,8 @@ function editProjectInDOM(index, name){
 function removeProjectInDOM(index){
     const project = document.querySelector(`.project[data-column="${index}"]`);
     const projectBox = project.closest(".project-box");
-    updateAfterRemoveProject(index);
     projectBox.remove();
+    updateAfterRemoveProject(index);
 }
 
 function showProject(project){
@@ -213,16 +213,30 @@ function updateAfterEditProject(name){
 }
 
 function updateAfterRemoveProject(index){
+    const project = projects[index-1];
+    console.log(project);
     const title = document.querySelector("h1");
-    
+
+    const name = findProjectNameByIndex(index - 1);
+    title.textContent = name;
+
+    const taskContainer = document.querySelector(".todos");
+    taskContainer.textContent = "";
+
+    if(project){
+        let tasks = project.todoItems; 
+        tasks.forEach((task, index) => {
+            const taskBox = createTaskElement(task, index);
+            taskContainer.appendChild(taskBox);
+    });
+    }
+
     if(index === 0){
         title.textContent = "";
         const addTaskBtn = document.querySelector(".add-task");
         addTaskBtn.remove();
-        return;
     }
-    const name = findProjectNameByIndex(index - 1);
-    title.textContent = name;
+
 }
 
 function createAddTask(){

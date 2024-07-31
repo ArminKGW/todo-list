@@ -103,6 +103,10 @@ function findProjectIndexByName(projectName){
 }
 
 function findProjectNameByIndex(projectIndex){
+    console.log(projectIndex);
+    if(projectIndex === -1){
+        return "";
+    }
     const projectName = projects[projectIndex].name;
     if(projectName){
         return projectName;

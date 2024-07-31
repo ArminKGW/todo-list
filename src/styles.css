@@ -113,6 +113,12 @@ spin.add-task{
     align-items: center;
 }
 
+dialog{
+    background-color: rgb(243, 242, 236);
+    border-radius: 1em;
+    border: 6px solid rgb(246, 181, 61);
+}
+
 dialog button, dialog input{
     height: 40px;
     width: 250px;
@@ -126,9 +132,14 @@ dialog button, dialog input{
     display: block;
 }
 
+#add-task-dialog input,
+#edit-task-dialog input{
+    margin-bottom: 12px;
+}
+
 dialog input{
     background-color: var(--input-bc);
-    margin-bottom: 12px;
+    width: 358px;
 }
 
 .confirm, .cancel{
@@ -147,6 +158,12 @@ button.cancel{
 #add-task-dialog .buttons,
 #edit-task-dialog .buttons{
     margin-top: 24px;
+}
+
+.form-grid-container p:first-of-type{
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
 select{
