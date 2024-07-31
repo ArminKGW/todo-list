@@ -233,3 +233,7 @@ button{
     cursor: pointer;
     border: 0;
 }
+
+button:focus{
+    outline: none;
+}
