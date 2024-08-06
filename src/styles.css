@@ -1,256 +1,257 @@
-:root{
-    --input-bc: rgb(196, 190, 190);
+:root {
+  --input-bc: rgb(196, 190, 190);
 }
 
-body{
-    background-color: rgb(225, 223, 223);
-    margin: 0;
+body {
+  background-color: rgb(225, 223, 223);
+  margin: 0;
 }
 
-#container{
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 5.5fr;
+#container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5.5fr;
 }
 
-.sidebar{
-    background-color: rgb(57, 185, 195);
-    height: 100vh;
-    padding: 0 8px;
+.sidebar {
+  background-color: rgb(57, 185, 195);
+  height: 100vh;
+  padding: 0 8px;
 }
 
-.sidebar-header{
-    display: flex;
-    height: 10%;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgb(35, 154, 163);
+.sidebar-header {
+  display: flex;
+  height: 10%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(35, 154, 163);
 }
 
-button.add-project{
-    height: 36px;
-    width: 36px;
-    border-radius: 10px;
-    margin-right: 12px;
-    font-size: 1.5rem;
-    font-weight: 700;
-    padding: 2px 8px;
+button.add-project {
+  height: 36px;
+  width: 36px;
+  border-radius: 10px;
+  margin-right: 12px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 2px 8px;
 }
 
-
-.project-box{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 24px;
+.project-box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
 }
 
-.project{
-    cursor: pointer;
-    font-size: 1.15rem;
-    font-weight: 600;
+.project {
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 600;
 }
 
-.content{
-    padding: 64px 50px;
+.content {
+  padding: 64px 50px;
 }
 
-.task-box{
-    height: 80px;
-    border-bottom: 1px solid rgb(202, 197, 197);
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: min-content 1fr 40px;
+.task-box {
+  height: 80px;
+  border-bottom: 1px solid rgb(202, 197, 197);
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: min-content 1fr 40px;
 }
 
-.left-container{
-    display: flex;
-    align-items: center;
+.left-container {
+  display: flex;
+  align-items: center;
 }
 
-.mid-container{
-    display: flex;
-    align-items: center;
+.mid-container {
+  display: flex;
+  align-items: center;
 }
 
-.mid-container > *{
-    margin-left: 32px;
+.mid-container > * {
+  margin-left: 32px;
 }
 
-.right-container{
-    justify-self: end;
-    align-self: center;
+.right-container {
+  justify-self: end;
+  align-self: center;
 }
 
-.task-name{
-    font-size: 24px;
+.task-name {
+  font-size: 24px;
 }
 
-.task-date{
-    color: rgb(35, 181, 35);
-    font-size: 16px;
-    font-weight: 700;
+.task-date {
+  color: rgb(35, 181, 35);
+  font-size: 16px;
+  font-weight: 700;
 }
 
-.add-task{
-    display: flex;
-    align-items: center;
-    background-color: inherit;
-    gap: 16px;
-    font-size: 22px;
-    color: rgb(96, 95, 95);
-    padding: 0;
+.add-task {
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+  gap: 16px;
+  font-size: 22px;
+  color: rgb(96, 95, 95);
+  padding: 0;
 }
 
-spin.add-task{
-    font-size: 3rem;
-    color: rgb(194, 84, 6);
-    margin-bottom: 4px;
+spin.add-task {
+  font-size: 3rem;
+  color: rgb(194, 84, 6);
+  margin-bottom: 4px;
 }
 
-.form-grid-container{
-    height: 200px;
-    display: grid;
-    align-items: center;
+.form-grid-container {
+  height: 200px;
+  display: grid;
+  align-items: center;
 }
 
-dialog{
-    background-color: rgb(243, 242, 236);
-    border-radius: 1em;
-    border: 6px solid rgb(246, 181, 61);
+dialog {
+  background-color: rgb(243, 242, 236);
+  border-radius: 1em;
+  border: 6px solid rgb(246, 181, 61);
 }
 
-dialog button, dialog input{
-    height: 40px;
-    width: 250px;
-    border-radius: 6px;
-    border: 0;
-    font-size: 20px;
+dialog button,
+dialog input {
+  height: 40px;
+  width: 250px;
+  border-radius: 6px;
+  border: 0;
+  font-size: 20px;
 }
 
 #add-task-dialog label,
-#edit-task-dialog label{
-    display: block;
+#edit-task-dialog label {
+  display: block;
 }
 
 #add-task-dialog input,
-#edit-task-dialog input{
-    margin-bottom: 12px;
+#edit-task-dialog input {
+  margin-bottom: 12px;
 }
 
-dialog input{
-    background-color: var(--input-bc);
-    width: 358px;
+dialog input {
+  background-color: var(--input-bc);
+  width: 358px;
 }
 
-.confirm, .cancel{
-    font-weight: 700;
-    color: rgb(200, 199, 199);
+.confirm,
+.cancel {
+  font-weight: 700;
+  color: rgb(200, 199, 199);
 }
 
-button.confirm{
-    background-color: rgb(30, 110, 0);
+button.confirm {
+  background-color: rgb(30, 110, 0);
 }
 
-button.cancel{
-    background-color: rgb(234, 60, 60);
+button.cancel {
+  background-color: rgb(234, 60, 60);
 }
 
 #add-task-dialog .buttons,
-#edit-task-dialog .buttons{
-    margin-top: 24px;
+#edit-task-dialog .buttons {
+  margin-top: 24px;
 }
 
-.form-grid-container p:first-of-type{
-    display: flex;
-    align-items: center;
-    gap: 18px;
+.form-grid-container p:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
-select{
-    width: 250px;
-    height: 40px;
-    border-radius: 6px;
-    border: 0;
-    background-color: var(--input-bc);
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
+select {
+  width: 250px;
+  height: 40px;
+  border-radius: 6px;
+  border: 0;
+  background-color: var(--input-bc);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
 }
 
-select option{
-    background-color: white;
-    font-weight: 700;
+select option {
+  background-color: white;
+  font-weight: 700;
 }
 
-option[value="low"]{
-    color: blue;
+option[value='low'] {
+  color: blue;
 }
 
-option[value="medium"]{
-    color: orange;
+option[value='medium'] {
+  color: orange;
 }
 
-option[value="high"]{
-    color: red;
+option[value='high'] {
+  color: red;
 }
 
-label{
-    font-size: 18px;
-    font-weight: 700;
+label {
+  font-size: 18px;
+  font-weight: 700;
 }
 
-input:hover{
-    background-color: rgb(207, 200, 200);
+input:hover {
+  background-color: rgb(207, 200, 200);
 }
 
-select:hover{
-    background-color: rgb(207, 200, 200);
+select:hover {
+  background-color: rgb(207, 200, 200);
 }
 
-.confirm:hover{
-    background-color: rgb(36, 120, 6);
-    color: black;
+.confirm:hover {
+  background-color: rgb(36, 120, 6);
+  color: black;
 }
 
-.cancel:hover{
-    background-color: rgb(251, 67, 67);
-    color: black;
+.cancel:hover {
+  background-color: rgb(251, 67, 67);
+  color: black;
 }
 
-img{
-    width: 20px;
-    cursor: pointer;
+img {
+  width: 20px;
+  cursor: pointer;
 }
 
-input[type="checkbox"]{
-    width: 20px;
-    height: 20px;
+input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
 }
 
-.priority{
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: inherit;
+.priority {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: inherit;
 }
 
-.low{
-    border: 2px solid blue;
+.low {
+  border: 2px solid blue;
 }
 
-.medium{
-    border: 2px solid orange;
+.medium {
+  border: 2px solid orange;
 }
 
-.high{
-    border: 2px solid red;
+.high {
+  border: 2px solid red;
 }
 
-button{
-    cursor: pointer;
-    border: 0;
+button {
+  cursor: pointer;
+  border: 0;
 }
 
-button:focus{
-    outline: none;
+button:focus {
+  outline: none;
 }
